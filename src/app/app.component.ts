@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 // SERVICE
 import { ProductService } from './product.service';
+import { ToastrService } from 'ngx-toastr';
 
 // MODEL
 import { Product } from './Product';
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public products: Array<Product> = [];
 
   constructor(
+    public toastrService: ToastrService,
     public productServive: ProductService,
     public activateRoute: ActivatedRoute
   ) {}
@@ -35,7 +37,10 @@ export class AppComponent implements OnInit, OnDestroy {
       const response: any = await this.productServive.listAllProducts(this.search).toPromise();
       this.products = response.data;
       this.loading = false;
+      this.toastrService.success('Listagem de produtos retornada com sucesso...', 'Sucesso!');
     } catch (err) {
+      console.log(err);
+      this.toastrService.error('', '');
       console.log(err);
     }
   }
