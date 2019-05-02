@@ -3,7 +3,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" data-toggle="tooltip" title="Utilize palavra-chaves para que o grau de acerto do produto esperado seja encontrado.">
       <input type="text" 
              [(ngModel)]="this.search"
              class="form-control" 
@@ -11,7 +11,7 @@
              #field="ngModel"
              required
              id="search" 
-             placeholder="Pesquisar..."
+             placeholder="Pesquisar por cód. barrras, n. produtos ou desc..."
              name="search">
     </div>
     <div *ngIf="this.notificationService.isLoading" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
