@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // MODEL
-import { Product } from './Product';
+import { Product } from '../models/Product';
 
 @Injectable({
   providedIn: 'root'

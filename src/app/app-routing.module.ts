@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // COMPONENT
-import { AppComponent} from './app.component';
+import { AppComponent} from './components/app.component';
 
 // RESOLVER
 
-import { ProductResolver } from './product.resolver';
+import { ProductResolver } from './components/product.resolver';
 
 const routes: Routes = [
   {

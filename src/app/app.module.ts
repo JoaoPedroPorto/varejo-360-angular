@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 
 // LIB
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // SERVICE
+import { ProductService } from './services/product.service';
+import { NotificationService } from './services/notification.service';
 
-import { ProductService } from './product.service';
-import { timeout } from 'q';
+// MIDDLEWARES
+import { HttpInterceptorService } from './services/http.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,13 @@ import { timeout } from 'q';
     })
   ],
   providers: [
-    ProductService
+    ProductService,
+    NotificationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -3,10 +3,10 @@ import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 
 // SERVICE
-import { ProductService } from './product.service';
+import { ProductService } from '../services/product.service';
 
 // MODEL
-import { Product } from './Product';
+import { Product } from '../models/Product';
 
 @Injectable({ providedIn: 'root' })
 export class ProductResolver implements Resolve<Observable<Array<Product>>> {

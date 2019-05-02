@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // SERVICE
-import { ProductService } from './product.service';
+import { ProductService } from '../services/product.service';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from '../services/notification.service';
 
 // MODEL
-import { Product } from './Product';
+import { Product } from '../models/Product';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +15,14 @@ import { Product } from './Product';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   public search: string;
-  public loading: boolean;
   public products: Array<Product> = [];
 
   constructor(
     public toastrService: ToastrService,
     public productServive: ProductService,
-    public activateRoute: ActivatedRoute
+    public activateRoute: ActivatedRoute,
+    public notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -33,14 +33,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public async filterListOfProducts(): Promise<void> {
     try {
-      this.loading = true;
       const response: any = await this.productServive.listAllProducts(this.search).toPromise();
       this.products = response.data;
-      this.loading = false;
-      this.toastrService.success('Listagem de produtos retornada com sucesso...', 'Sucesso!');
+      if (this.products.length !== 0) {
+        this.notificationService.notify('Listagem de produtos retornada com sucesso...', 200);
+      }
     } catch (err) {
-      console.log(err);
-      this.toastrService.error('', '');
       console.log(err);
     }
   }

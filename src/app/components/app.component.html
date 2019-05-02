@@ -1,0 +1,55 @@
+<div class="jumbotron text-center" style="background: #454d55;">
+  <h1 style="color: #FFFFFF;">O Guru do Leite</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <input type="text" 
+             [(ngModel)]="this.search"
+             class="form-control" 
+             (keyup)="filterListOfProducts()" 
+             #field="ngModel"
+             required
+             id="search" 
+             placeholder="Pesquisar..."
+             name="search">
+    </div>
+    <div *ngIf="this.notificationService.isLoading" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
+      <div class="spinner-border"></div>
+    </div>
+    <div *ngIf="!this.notificationService.isLoading && this.products.length > 0" class="col-sm-12" style="padding-top: 32px;">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th data-toggle="tooltip" title="Código de Barra">EAN</th>
+            <th data-toggle="tooltip" title="Nome do Produto">N. Produto</th>
+            <th data-toggle="tooltip" title="Probabilidade">Prob.</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let product of products">
+          <tr>
+            <td>{{ product.barCode }}</td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.probability ? product.probability + '%' : '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!this.notificationService.isLoading && this.products.length === 0" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
+      <h3>Nenhum resultado foi encontrado...</h3>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
