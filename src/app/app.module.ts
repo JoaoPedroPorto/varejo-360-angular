@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { routes } from './app-routing.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
@@ -28,6 +30,12 @@ import { HttpInterceptorService } from './services/http.interceptor.service';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(
+      routes,
+      {
+        preloadingStrategy: PreloadAllModules
+      }
+    ),
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-top-right',

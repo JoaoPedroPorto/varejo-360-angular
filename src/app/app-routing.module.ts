@@ -8,7 +8,7 @@ import { AppComponent} from './components/app.component';
 
 import { ProductResolver } from './components/product.resolver';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: AppComponent,

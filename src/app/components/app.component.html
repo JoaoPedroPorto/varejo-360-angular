@@ -7,7 +7,7 @@
       <input type="text" 
              [(ngModel)]="this.search"
              class="form-control" 
-             (keyup)="filterListOfProducts()" 
+             (keyup)="filter()" 
              #field="ngModel"
              required
              id="search" 

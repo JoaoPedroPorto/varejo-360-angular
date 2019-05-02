@@ -28,10 +28,10 @@ export class AppComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.search = '';
     // this.products = this.activateRoute.snapshot.data.products;
-    this.filterListOfProducts();
+    this.listOfProducts();
   }
 
-  public async filterListOfProducts(): Promise<void> {
+  public async listOfProducts(): Promise<void> {
     try {
       const response: any = await this.productServive.listAllProducts(this.search).toPromise();
       this.products = response.data;
@@ -41,6 +41,14 @@ export class AppComponent implements OnInit, OnDestroy {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  public filter(): void {
+    if (this.search.length > 0 && this.search.trim().length === 0) {
+      this.products = [];
+      return;
+    }
+    this.listOfProducts();
   }
 
   public ngOnDestroy(): void {}
