@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PATH } from '../static/app.api';
 
 // MODEL
 import { Product } from '../models/Product';
@@ -11,7 +12,6 @@ import { Product } from '../models/Product';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-  private path = 'http://localhost:8080/api';
 
   private setHeader(): any {
     const headers: HttpHeaders = new HttpHeaders({
@@ -25,7 +25,7 @@ export class ProductService {
   public listAllProducts(search?: string): Observable<Array<Product>> {
     const options: any = this.setHeader();
 
-    return this.http.post<any[]>(`${this.path}/product`, JSON.stringify({ keyword: search }), { headers: options })
+    return this.http.post<any[]>(`${PATH}/product`, JSON.stringify({ keyword: search }), { headers: options })
       .pipe(map(result => {
         return result;
       })
