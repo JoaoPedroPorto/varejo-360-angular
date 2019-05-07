@@ -35,8 +35,11 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="!this.notificationService.isLoading && this.products.length === 0" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
+    <div *ngIf="!this.notificationService.serverIndisponible && !this.notificationService.isLoading && this.products.length === 0" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
       <h3>Nenhum resultado foi encontrado...</h3>
+    </div>
+    <div *ngIf="this.notificationService.serverIndisponible" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
+      <img src="https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-line-1/32/-_Cloud-Off-Computing-Data-Disable-Unavailable-Server-Inactive-15-512.png" class="rounded" alt="Aplicação indisponível" width="512" height="512">
     </div>
   </div>
 </div>

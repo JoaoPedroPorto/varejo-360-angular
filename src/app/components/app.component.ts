@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 // SERVICE
 import { ProductService } from '../services/product.service';
-import { ToastrService } from 'ngx-toastr';
 import { NotificationService } from '../services/notification.service';
 
 // MODEL
@@ -19,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public products: Array<Product> = [];
 
   constructor(
-    public toastrService: ToastrService,
     public productServive: ProductService,
     public activateRoute: ActivatedRoute,
     public notificationService: NotificationService

@@ -26,7 +26,9 @@ export class HttpInterceptorService implements HttpInterceptor {
         },
         error => {
           this.notificationService.stopLoading();
-          this.notificationService.notify(error.error.error, error.code);
+          const code: number = error.code ? error.code : 0;
+          const message: string = error.error.error;
+          this.notificationService.notify(message, code);
         }
       )
     );

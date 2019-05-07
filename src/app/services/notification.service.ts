@@ -7,7 +7,8 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class NotificationService {
-  public isLoading: boolean = false;
+  public isLoading = false;
+  public serverIndisponible = false;
 
   constructor(
     private toastrService: ToastrService
@@ -22,15 +23,24 @@ export class NotificationService {
       this.toastrService.info(message, 'Informação!');
       return;
     }
-    if (code === 401 || code === 403) {
+    if (code === 401) {
+      this.toastrService.warning('Sem acesso...', 'Aviso!');
+      return;
+    }
+    if (code === 403) {
       this.toastrService.warning('Sem permissão...', 'Aviso!');
       return;
     }
     if (code === 500) {
+      this.serverIndisponible = true;
       this.toastrService.error(message, 'Aplicação indisponível!');
       return;
     }
-    this.toastrService.info(message, 'Informação!');
+    if (code === 0) {
+      this.serverIndisponible = true;
+      this.toastrService.error('Aplicaçao se encontra indisponível no momento. Tente novamente mais tarde...', 'Aplicação indisponível!');
+      return;
+    }
   }
 
   public initLoading(): void {
