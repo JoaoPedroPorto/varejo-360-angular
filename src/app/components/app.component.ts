@@ -46,6 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.products = [];
       return;
     }
+    this.notificationService.setServerIndisponible();
     this.listOfProducts();
   }
 

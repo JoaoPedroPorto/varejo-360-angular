@@ -1,4 +1,4 @@
 export const environment: any = {
   production: true,
-  PATH: 'http://localhost:8080/api'
+  PATH: 'https://varejo360.herokuapp.com/api'
 };

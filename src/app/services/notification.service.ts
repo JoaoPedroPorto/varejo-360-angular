@@ -36,7 +36,7 @@ export class NotificationService {
       this.toastrService.error(message, 'Aplicação indisponível!');
       return;
     }
-    if (code === 0) {
+    if (code === 0 || code === 503) {
       this.serverIndisponible = true;
       this.toastrService.error('Aplicaçao se encontra indisponível no momento. Tente novamente mais tarde...', 'Aplicação indisponível!');
       return;
@@ -49,6 +49,10 @@ export class NotificationService {
 
   public stopLoading(): void {
     this.isLoading = false;
+  }
+
+  public setServerIndisponible(): void {
+    this.serverIndisponible = false;
   }
 
 }
