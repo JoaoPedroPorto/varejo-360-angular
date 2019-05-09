@@ -33,12 +33,12 @@ export class NotificationService {
     }
     if (code === 500) {
       this.serverIndisponible = true;
-      this.toastrService.error(message, 'Aplicação indisponível!');
+      this.toastrService.error(message, 'Erro na aplicação!');
       return;
     }
-    if (code === 0 || code === 503) {
+    if (code === 0 || code === 503 || code === 404) {
       this.serverIndisponible = true;
-      this.toastrService.error('Aplicaçao se encontra indisponível no momento. Tente novamente mais tarde...', 'Aplicação indisponível!');
+      this.toastrService.error('Aplicação se encontra indisponível no momento. Tente novamente mais tarde...', 'Aplicação indisponível!');
       return;
     }
   }
