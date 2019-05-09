@@ -37,8 +37,8 @@ import { HttpInterceptorService } from './services/http.interceptor.service';
       }
     ),
     ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-top-right',
+      timeOut: 4000,
+      positionClass: 'toast-bottom-center',
       preventDuplicates: true
     })
   ],
