@@ -18,50 +18,30 @@
       <div class="spinner-border"></div>
     </div>
     <div *ngIf="!this.notificationService.isLoading && this.products.length > 0" class="col-sm-12" style="padding-top: 32px;">
-      <!--
-        <table class="table table-dark table-striped">
-          <thead>
-            <tr>
-              <th data-toggle="tooltip" title="Código de Barra">EAN</th>
-              <th data-toggle="tooltip" title="Nome do Produto">N. Produto</th>
-              <th data-toggle="tooltip" title="Probabilidade">Prob.</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let product of products">
-            <tr>
-              <td>{{ product.barCode }}</td>
-              <td>{{ product.productName }}</td>
-              <td>{{ product.probability ? product.probability + '%' : '-' }}</td>
-            </tr>
-          </tbody>
-        </table>
-        
-      -->
-          <div id="accordion">
-            <div style="padding-bottom: 10px;" *ngFor="let product of products; let i = index">
-              <div class="card" style="border-color: #454d55;">
-                <div class="card-header" style="background: #454d55;">
-                  <a class="card-link" data-toggle="collapse" [href]="'#collapse' + i">
-                    <div class="row" style="color: #FFFFFF;">
-                      <div class="col-sm-9">
-                        <p><strong>{{ product.barCode }}</strong></p>
-                        <p><strong>{{ product.productName }}</strong></p>
-                      </div>
-                      <div class="col-sm-3" style="display: flex; align-items: center; justify-content: center;">
-                        <h3>{{ product.probability ? product.probability + '%' : '-' }}</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div [id]="'collapse' + i" class="collapse" data-parent="#accordion">
-                  <div class="card-body" style="background: darkgray; color: #FFFFFF;">
-                      {{ product.description }}
+      <div id="accordion">
+        <div style="padding-bottom: 10px;" *ngFor="let product of products; let i = index">
+          <div class="card" style="border-color: #454d55;">
+            <div class="card-header" style="background: #454d55;">
+              <a class="card-link" data-toggle="collapse" [href]="'#collapse' + i">
+                <div class="row" style="color: #FFFFFF;">
+                  <div class="col-sm-9">
+                    <p><strong>{{ product.barCode }}</strong></p>
+                    <p><strong>{{ product.productName }}</strong></p>
+                  </div>
+                  <div class="col-sm-3" style="display: flex; align-items: center; justify-content: center;">
+                    <h3>{{ product.probability ? product.probability + '%' : '-' }}</h3>
                   </div>
                 </div>
+              </a>
+            </div>
+            <div [id]="'collapse' + i" class="collapse" data-parent="#accordion">
+              <div class="card-body" style="background: darkgray; color: #FFFFFF;">
+                {{ product.description }}
               </div>
-              
             </div>
           </div>
+        </div>
+      </div>
     </div>
     <div *ngIf="!this.notificationService.serverIndisponible && !this.notificationService.isLoading && this.products.length === 0" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
       <h3>Nenhum resultado foi encontrado...</h3>
@@ -69,18 +49,6 @@
     <div *ngIf="this.notificationService.serverIndisponible" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
       <img src="https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-line-1/32/-_Cloud-Off-Computing-Data-Disable-Unavailable-Server-Inactive-15-512.png" class="rounded" alt="Aplicação indisponível" width="150" height="150">
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
 </div>
 
