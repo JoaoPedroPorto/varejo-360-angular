@@ -8,6 +8,9 @@ import { routes } from './app-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
 
+// NG SELECT
+import { NgSelectModule } from '@ng-select/ng-select';
+
 // LIB
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +28,7 @@ import { HttpInterceptorService } from './services/http.interceptor.service';
   ],
   imports: [
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -35,12 +39,12 @@ import { HttpInterceptorService } from './services/http.interceptor.service';
       {
         preloadingStrategy: PreloadAllModules
       }
-    ),
-    ToastrModule.forRoot({
-      timeOut: 4000,
-      positionClass: 'toast-bottom-center',
-      preventDuplicates: true
-    })
+      ),
+      ToastrModule.forRoot({
+        timeOut: 4000,
+        positionClass: 'toast-bottom-center',
+        preventDuplicates: true
+      }),
   ],
   providers: [
     ProductService,

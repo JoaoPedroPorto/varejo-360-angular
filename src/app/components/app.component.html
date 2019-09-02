@@ -1,9 +1,29 @@
 <div class="jumbotron text-center" style="background: #454d55;">
-  <h1 style="color: #FFFFFF;">O Guru do Leite</h1>
+  <h1 style="color: #FFFFFF;">Diagnósticos de doença</h1>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12" data-toggle="tooltip" title="Utilize palavra-chaves para que o grau de acerto do produto esperado seja encontrado.">
+    <div class="col-sm-12" style="display: flex;align-items: center;justify-content: center;">
+      <ng-select id="symptoms"
+                 name="symptoms"
+                 placeholder="Síntomas:"
+                 [items]="symptoms"
+                 bindLabel="symptoms"
+                 [multiple]="true"
+                 bindValue="id"
+                 #periodName="ngModel"
+                 [(ngModel)]="this.selectedSymptoms"
+                 style="height: 60px;border-color: #ebebeb;">
+      </ng-select>
+    </div>
+
+
+
+
+
+
+
+    <!-- <div class="col-sm-12" data-toggle="tooltip" title="Utilize palavra-chaves para que o grau de acerto do produto esperado seja encontrado.">
       <input type="text" 
              [(ngModel)]="this.search"
              class="form-control" 
@@ -13,7 +33,7 @@
              id="search" 
              placeholder="Pesquisar por cód. barrras, n. produtos ou desc..."
              name="search">
-    </div>
+    </div> -->
     <div *ngIf="this.notificationService.isLoading" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
       <div class="spinner-border"></div>
     </div>
