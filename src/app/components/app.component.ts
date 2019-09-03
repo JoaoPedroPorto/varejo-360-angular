@@ -55,6 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
   public process(): void {
     this.mountDiseases();
     this.result = [];
+    if (this.selectedSymptoms.length === 0) {
+      return;
+    }
     this.notificationService.initLoading();
     setTimeout(() => {
       let hasSymptom: boolean;
