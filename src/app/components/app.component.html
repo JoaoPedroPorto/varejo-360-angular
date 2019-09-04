@@ -1,129 +1,65 @@
 <div class="jumbotron text-center" style="background: #454d55;">
   <h1 style="color: #FFFFFF;">Diagnósticos de doença</h1>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12" style="display: flex;align-items: center;justify-content: center;margin-bottom: 32px;">
-        <div class="col-sm-10">
-
-          <ng-select id="symptoms"
-                     name="symptoms"
-                     placeholder="Síntomas:"
-                     [items]="symptoms"
-                     bindLabel="symptoms"
-                     [multiple]="true"
-                     bindValue="id"
-                     #periodName="ngModel"
-                     [(ngModel)]="this.selectedSymptoms"
-                     style="height: 60px;border-color: #ebebeb;">
-          </ng-select>
-        </div>
-        <div (click)="process()" class="col-sm-2" style="margin-top: -23px; text-align: right;">
-          <button type="button" class="btn btn-dark" type="submit" value="Submit">Processar</button>
-        </div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-10" style="padding: 10px 10px 10px 10px;">
+        <ng-select  id="symptoms"
+                    name="symptoms"
+                    placeholder="Síntomas:"
+                    [items]="symptoms"
+                    bindLabel="symptoms"
+                    [multiple]="true"
+                    bindValue="id"
+                    #periodName="ngModel"
+                    [(ngModel)]="this.selectedSymptoms"
+                    style="height: 60px;border-color: #ebebeb; display: contents !important;">
+        </ng-select>
+      </div>
+      <div class="col-sm-2" style="padding: 10px 10px 10px 10px;display: flex; align-items: center; justify-content: center;">
+        <button type="button" (click)="process()" class="btn btn-dark" style="padding: 4px 5px 4px 5px;" type="submit" value="Submit">Processar</button>
+      </div>
     </div>
-
-
-
-
-
-
-
-    <!-- <div class="col-sm-12" data-toggle="tooltip" title="Utilize palavra-chaves para que o grau de acerto do produto esperado seja encontrado.">
-      <input type="text" 
-             [(ngModel)]="this.search"
-             class="form-control" 
-             (keyup)="filter()" 
-             #field="ngModel"
-             required
-             id="search" 
-             placeholder="Pesquisar por cód. barrras, n. produtos ou desc..."
-             name="search">
-    </div> -->
-    <div *ngIf="this.notificationService.isLoading" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
-      <div class="spinner-border"></div>
+    <div class="row">
+      <div *ngIf="this.notificationService.isLoading" class="col-sm-12" style="display: flex; align-items: center; justify-content: center; padding: 10px 10px 10px 10px;">
+        <div class="spinner-border"></div>
+      </div>
     </div>
-
-
-    <div *ngIf="!this.notificationService.isLoading && this.result.length > 0" class="col-sm-12" style="padding-top: 32px;">
-        <div id="accordion">
-          <div style="padding-bottom: 10px;" *ngFor="let disease of result; let i = index">
-            <div class="card" style="border-color: #454d55;">
-              <div class="card-header" style="background: #454d55;">
-                <a class="card-link" data-toggle="collapse" [href]="'#collapse' + i">
-                  <div class="row" style="color: #FFFFFF;">
-                    <div class="col-sm-9">
-                      <p><strong>{{ disease.name }}</strong></p>
-                      <!-- <p><strong>{{ disease.name }}</strong></p> -->
+    <div class="row">
+      <div *ngIf="!this.notificationService.isLoading && this.result.length > 0" class="col-sm-12" style="padding: 0px;">
+          <div id="accordion">
+            <div *ngFor="let disease of result; let i = index" style="padding: 3px 10px 3px 10px;">
+              <div class="card" style="border-color: #454d55;">
+                <div class="card-header" style="background: #454d55;">
+                  <a class="card-link" data-toggle="collapse" [href]="'#collapse' + i">
+                    <div class="row" style="color: #FFFFFF;">
+                      <div class="col-sm-9">
+                        <p><strong>{{ disease.name }}</strong></p>
+                      </div>
+                      <div class="col-sm-3" style="display: flex; align-items: center; justify-content: center;">
+                        <h3>{{ disease.probability ? disease.probability + '%' : '-' }}</h3>
+                      </div>
                     </div>
-                    <div class="col-sm-3" style="display: flex; align-items: center; justify-content: center;">
-                      <h3>{{ disease.probability ? disease.probability + '%' : '-' }}</h3>
-                    </div>
+                  </a>
+                </div>
+                <div [id]="'collapse' + i" class="collapse" data-parent="#accordion">
+                  <div class="card-body" style="background: darkgray; color: #FFFFFF;">
+                    {{ disease.description }}
                   </div>
-                </a>
-              </div>
-              <div [id]="'collapse' + i" class="collapse" data-parent="#accordion">
-                <div class="card-body" style="background: darkgray; color: #FFFFFF;">
-                  {{ disease.description }}
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </div>
-
-
-
-
-
-
-
-
-
-    <!-- <div *ngIf="!this.notificationService.isLoading && this.products.length > 0" class="col-sm-12" style="padding-top: 32px;">
-      <div id="accordion">
-        <div style="padding-bottom: 10px;" *ngFor="let product of products; let i = index">
-          <div class="card" style="border-color: #454d55;">
-            <div class="card-header" style="background: #454d55;">
-              <a class="card-link" data-toggle="collapse" [href]="'#collapse' + i">
-                <div class="row" style="color: #FFFFFF;">
-                  <div class="col-sm-9">
-                    <p><strong>{{ product.barCode }}</strong></p>
-                    <p><strong>{{ product.productName }}</strong></p>
-                  </div>
-                  <div class="col-sm-3" style="display: flex; align-items: center; justify-content: center;">
-                    <h3>{{ product.probability ? product.probability + '%' : '-' }}</h3>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div [id]="'collapse' + i" class="collapse" data-parent="#accordion">
-              <div class="card-body" style="background: darkgray; color: #FFFFFF;">
-                {{ product.description }}
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+    <div class="row">
+      <div *ngIf="!this.notificationService.serverIndisponible && !this.notificationService.isLoading && this.result.length === 0" class="col-sm-12" style="display: flex; align-items: center; justify-content: center;padding:10px 10px 10px 10px;">
+        <h3>Não há informações para serem mostradas...</h3>
       </div>
-    </div> -->
-    <div *ngIf="!this.notificationService.serverIndisponible && !this.notificationService.isLoading && this.result.length === 0" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
-      <h3>Não há informações para serem mostradas...</h3>
     </div>
-    <div *ngIf="this.notificationService.serverIndisponible" class="col-sm-12" style="padding-top: 32px;display: flex;align-items: center;justify-content: center;">
-      <img src="https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-line-1/32/-_Cloud-Off-Computing-Data-Disable-Unavailable-Server-Inactive-15-512.png" class="rounded" alt="Aplicação indisponível" width="150" height="150">
+    <div class="row">
+      <div *ngIf="this.notificationService.serverIndisponible" class="col-sm-12" style="display: flex; align-items: center; justify-content: center; padding: 10px 10px 10px 10px;">
+        <img src="https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-line-1/32/-_Cloud-Off-Computing-Data-Disable-Unavailable-Server-Inactive-15-512.png" class="rounded" alt="Aplicação indisponível" width="150" height="150">
+      </div>
     </div>
-  </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -74,9 +74,18 @@ export class AppComponent implements OnInit, OnDestroy {
           this.result.push(disease);
         }
       }
+      this.result.sort(function(a, b) {
+        if (a.probability < b.probability) {
+          return 1;
+        }
+        if (a.probability > b.probability) { return -1; }
+        return 0;
+      });
       this.notificationService.setServerIndisponible();
       this.notificationService.stopLoading();
     }, 500);
+
+
   }
 
   private mountDiseases(): void {
@@ -307,6 +316,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.symptoms.push('PERDA DE APETITE');
     this.symptoms.push('DORES ABDOMINAIS');
     this.symptoms.push('FEZES ESCURAS');
+    this.symptoms.sort(function (a: string, b: string) {
+      if (a < b) { return -1; }
+      if (a > b) { return 1; }
+      return 0;
+    });
   }
 
   /* public async listOfProducts(): Promise<void> {
