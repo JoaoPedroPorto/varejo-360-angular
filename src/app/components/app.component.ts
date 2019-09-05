@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 
 // SERVICE
 import { ProductService } from '../services/product.service';
 import { NotificationService } from '../services/notification.service';
+
+// UTILS
+import { ViewValidation } from '../validations/ViewValidation';
 
 // MODEL
 import { Product } from '../models/Product';
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public disease: Disease;
   public diseases: Array<Disease> = [];
   public result: Array<Disease> = [];
+  public ViewValidation: ViewValidation = new ViewValidation();
 
   constructor(
     public productServive: ProductService,

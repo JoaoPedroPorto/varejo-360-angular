@@ -1,4 +1,4 @@
-<div class="jumbotron text-center" style="background: #454d55;">
+<div style="background: #454d55; padding: 3rem 1rem; display: flex; align-items: center; justify-content: center;">
   <h1 style="color: #FFFFFF;">Diagnósticos de doença</h1>
 </div>
 <div class="container-fluid">
@@ -17,7 +17,15 @@
         </ng-select>
       </div>
       <div class="col-sm-2" style="padding: 10px 10px 10px 10px;display: flex; align-items: center; justify-content: center;">
-        <button type="button" (click)="process()" class="btn btn-dark" style="padding: 4px 5px 4px 5px;" type="submit" value="Submit">Processar</button>
+        <button (click)="process()" 
+                *ngIf="!this.notificationService.isLoading"
+                [disabled]="!ViewValidation.isValidMultipleSelect(this.selectedSymptoms)"
+                class="btn btn-dark" 
+                style="padding: 4px 5px 4px 5px;" 
+                type="submit" 
+                value="Submit">
+                Processar
+        </button>
       </div>
     </div>
     <div class="row">
