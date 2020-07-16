@@ -22,7 +22,7 @@
     "@ng-select/ng-select": "^2.20.5",
     "core-js": "^2.5.4",
     "fstream": "^1.0.12",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "ngx-toastr": "^10.0.2",
     "rxjs": "~6.3.3",
     "tar": "^4.4.10",
